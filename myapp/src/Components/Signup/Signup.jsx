@@ -17,11 +17,19 @@ import {
   useToast,
 
 } from '@chakra-ui/react'
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+  } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { signup, signupfailure, signupsuccess } from '../../Redux/Authentication/SignUp/Action'
+import axios from 'axios'
+import { api } from '../../Redux/Api'
 
 const initialdata={
     userName:"",
@@ -48,21 +56,42 @@ function formatDate(inputDate) {
     return `${day}-${month}-${year}`;
   }
 const dispatch=useDispatch()
+const navigate=useNavigate()
 const signuphandle=useSelector((state)=>state.signupreducer)
-const {isLoading,isError}=signuphandle
+const {isLoading,isError,done}=signuphandle
 const toast=useToast()
 const handlesubmit=(e)=>{
     e.preventDefault()
-    console.log(signupdata)
+    // console.log(signupdata)
     const maindate=formatDate(signupdata.dob)
     const mobileNumberPattern = /^\d{10}$/;
     if (mobileNumberPattern.test(signupdata.mobileNo)) {
-       dispatch(signup({...signupdata,dob:maindate}))
+       dispatch(signup({...signupdata,dob:maindate})).then((res)=>{
+        const isEmailInArray = res.data.some((element) => element.emailId === signupdata.emailId);
+        // console.log(isEmailInArray)
+        if(!isEmailInArray){
+            axios.post(`${api}/users`,signupdata).then((res)=>{
+                toast({description:"Signup Successfully",status:"success","position":"top",duration:2000})
+
+                dispatch(signupsuccess())
+                navigate("/login")
+            })
+        }else{
+            toast({description:"Already Registered user",status:"error","position":"top",duration:2000})
+            dispatch(signupfailure())
+        }
+       }).catch((err)=>{
+        dispatch(signupfailure())
+       })
            
     }
    
 }
+// console.log(done,)
   return (
+    <>
+
+
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -161,6 +190,6 @@ const handlesubmit=(e)=>{
           </Stack>
         </Box>
       </Stack>
-    </Flex>
+    </Flex></>
   )
 }
