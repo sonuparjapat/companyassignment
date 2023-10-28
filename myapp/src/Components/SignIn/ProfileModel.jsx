@@ -64,7 +64,7 @@ export default function ProfileModel({id,isOpen,onClose,userName,firstName,lastN
   
             <ModalFooter>
               <Box display={"flex"} justifyContent={"space-evenly"}>
-          <Box p={2}><Edit handleupdate={handleupdate} id={id} firstName={firstName}lastName={lastName} userName={userName} emailId={emailId} mobileNo={mobileNo} dob={dob}/></Box>  
+          <Box p={2}><Edit profileonclose={onClose} handleupdate={handleupdate} id={id} firstName={firstName}lastName={lastName} userName={userName} emailId={emailId} mobileNo={mobileNo} dob={dob}/></Box>  
           <Box  p={2}>  <DeleteDialoge id={id}/></Box>
              <Box  p={2}> <Button onClick={onClose}>Cancel</Button></Box></Box>
             </ModalFooter>

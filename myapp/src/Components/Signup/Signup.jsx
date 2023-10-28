@@ -47,6 +47,8 @@ const handlechange=(e)=>{
     const {name,value}=e.target
     setSignupdata((pre)=>({...pre,[name]:value}))
 }
+
+// converting orignal input dob into this format 12-Oct-2023
 function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = date.getDate();
@@ -60,10 +62,14 @@ const navigate=useNavigate()
 const signuphandle=useSelector((state)=>state.signupreducer)
 const {isLoading,isError,done}=signuphandle
 const toast=useToast()
+
+// handling signuprequest here
 const handlesubmit=(e)=>{
     e.preventDefault()
     // console.log(signupdata)
     const maindate=formatDate(signupdata.dob)
+
+    // validation for mobile no
     const mobileNumberPattern = /^\d{10}$/;
     if (mobileNumberPattern.test(signupdata.mobileNo)) {
        dispatch(signup).then((res)=>{

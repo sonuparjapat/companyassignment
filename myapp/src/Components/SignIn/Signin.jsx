@@ -36,6 +36,8 @@ export default function SignIn() {
     const [signindata,setSignindata]=useState(initialdata)
     const [foranychange,setForanyChange]=useState(false)
     const [userprofile,setUserprofile]=useState(intuserprofile)
+
+    // handling inputvalues
     const handlechange=(e)=>{
         const {name,value}=e.target
         setSignindata((pre)=>({...pre,[name]:value}))
@@ -51,6 +53,8 @@ export default function SignIn() {
     const navigate=useNavigate()
     const signhandle=useSelector((state)=>state.signinreducer)
     const {isLoading,isError,userdata}=signhandle
+
+    // Making Login request
     const handlesubmit=(e)=>{
         e.preventDefault()
         // console.log(signindata)

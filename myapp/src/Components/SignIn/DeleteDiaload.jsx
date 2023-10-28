@@ -12,6 +12,8 @@ export default function DeleteDialoge({id}) {
   const deletedata=useSelector((state)=>state.deleteuserreducer)
   const {isLoading,isError}=deletedata
   const toast=useToast()
+
+//   handleing edit request
   const handledelete=(id)=>{
 dispatch(deleteuser(id)).then((res)=>{
 dispatch(deletesuccess())

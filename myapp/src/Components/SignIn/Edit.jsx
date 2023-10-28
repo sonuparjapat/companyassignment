@@ -14,7 +14,7 @@ const initialdata={
      mobileNo:"", 
      emailId:""
 }
-export default function Edit({handleupdate,id,firstName,lastName,userName,emailId,mobileNo,dob}) {
+export default function Edit({profileonclose,handleupdate,id,firstName,lastName,userName,emailId,mobileNo,dob}) {
     const [editdata,setEditdata]=useState(initialdata)
     useEffect(()=>{
         setEditdata((pre)=>({...pre,userName,firstName,lastName,dob:convertinoriginal(dob),mobileNo,emailId}))
@@ -30,6 +30,8 @@ export default function Edit({handleupdate,id,firstName,lastName,userName,emailI
 //   console.log(id)
   const dispatch=useDispatch()
   const navigate=useNavigate()
+
+//   Converting input date into this format "12-Oct-2023"
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = date.getDate();
@@ -39,6 +41,7 @@ export default function Edit({handleupdate,id,firstName,lastName,userName,emailI
     return `${day}-${month}-${year}`;
   }
 
+//   converting into orignal format
   function convertinoriginal(inputDate) {
     const months = {
         'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
@@ -56,6 +59,8 @@ export default function Edit({handleupdate,id,firstName,lastName,userName,emailI
   const usereditdata=useSelector((state)=>state.usereditreducer)
   const {isLoading,isError}=usereditdata
   const toast=useToast()
+
+//   Making edit/patch request
   const handleedit=(id)=>{
   
  
@@ -68,6 +73,7 @@ export default function Edit({handleupdate,id,firstName,lastName,userName,emailI
 
                 dispatch(editsuccuess())
                 onClose()
+                profileonclose()
                 handleupdate()
                 navigate("/login")
             }).catch((err)=>{
