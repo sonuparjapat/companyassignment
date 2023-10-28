@@ -145,7 +145,7 @@ export default function Edit({profileonclose,handleupdate,id,firstName,lastName,
                <Button colorScheme='green' ml={3}>
             Loading...
              </Button>:   <Button colorScheme='green' onClick={()=>handleedit(id)} ml={3}>
-                  Delete
+                 Edit
                 </Button>}
               </AlertDialogFooter>
             </AlertDialogContent>
