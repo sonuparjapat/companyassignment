@@ -34,7 +34,7 @@ navigate("/signup")
     return (
       <>
         <Button colorScheme='red' onClick={onOpen}>
-          Delete Customer
+          Remove User
         </Button>
   
         <AlertDialog
