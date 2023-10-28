@@ -41,9 +41,11 @@ export default function ProfileModel({id,isOpen,onClose,userName,firstName,lastN
       <Text>
         <strong>First Name:</strong> {firstName}
       </Text>
-      <Text>
-        <strong>Last Name:</strong> {lastName}
-      </Text>
+      {lastName&& <Text>
+      
+      <strong>Last Name:</strong> {lastName}
+    </Text>}
+     
       <Text>
         <strong>Email:</strong> {emailId}
       </Text>

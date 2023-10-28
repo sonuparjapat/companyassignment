@@ -35,10 +35,12 @@ export default function Edit({profileonclose,handleupdate,id,firstName,lastName,
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = date.getDate();
+    const newday=day<10?`0${day}`:day
+    // console.log(day,newday)
     const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
   
-    return `${day}-${month}-${year}`;
+    return `${newday}-${month}-${year}`;
   }
 
 //   converting into orignal format
@@ -51,6 +53,7 @@ export default function Edit({profileonclose,handleupdate,id,firstName,lastName,
     
       const parts = inputDate.split('-');
       const day = parts[0];
+    //   console.log(day)
       const month = months[parts[1]];
       const year = parts[2];
       const formattedDate = `${year}-${month}-${day}`;

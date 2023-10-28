@@ -52,10 +52,13 @@ const handlechange=(e)=>{
 function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = date.getDate();
+    const newdate=day<10?`0${day}`:day
+    // console.log(day)
+    // console.log(newdate,"newdate")
     const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
   
-    return `${day}-${month}-${year}`;
+    return `${newdate}-${month}-${year}`;
   }
 const dispatch=useDispatch()
 const navigate=useNavigate()
