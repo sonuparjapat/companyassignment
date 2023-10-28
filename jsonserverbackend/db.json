@@ -1,0 +1,14 @@
+{
+    "users":[
+        {
+            "id":1,
+            "userName":"mohan",
+            "firstName":"mohan",
+            "lastName":"singh",
+            "dob":"09-12-2000",
+            "emailId":"mohan@gmail.com",
+            "password":"123",
+            "mobileNo":"1234567890"
+        }
+    ]
+}
