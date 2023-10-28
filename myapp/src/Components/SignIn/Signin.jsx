@@ -67,7 +67,7 @@ dispatch(singinsuccess(foundUser))
 setUserprofile(foundUser)
 
    }else{
-    toast({description:"Not a Registered User",status:"error",position:"top",duration:2000}) 
+    toast({description:"Not a Registered User/Check Details",status:"error",position:"top",duration:2000}) 
     dispatch(signinfailure())
    }
    
