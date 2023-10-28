@@ -18,13 +18,23 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signin, signinfailure, singinsuccess } from '../../Redux/Authentication/Action'
+import ProfileModel from './ProfileModel'
 
 const initialdata={
     emailId:"",
     password:""
 }
+const intuserprofile={
+    "userName":"",
+    "firstName":"",
+    "lastName":"",
+    "emailId":"",
+    mobileNo:"",
+    dob:""
+}
 export default function SignIn() {
     const [signindata,setSignindata]=useState(initialdata)
+    const [userprofile,setUserprofile]=useState(intuserprofile)
     const handlechange=(e)=>{
         const {name,value}=e.target
         setSignindata((pre)=>({...pre,[name]:value}))
@@ -36,14 +46,15 @@ export default function SignIn() {
     const {isLoading,isError,userdata}=signhandle
     const handlesubmit=(e)=>{
         e.preventDefault()
-        console.log(signindata)
+        // console.log(signindata)
 dispatch(signin).then((res)=>{
    const ispresent=res.data.some((element)=>element.emailId==signindata.emailId&&element.password==signindata.password)
    if(ispresent){
 toast({description:"Login Successfully",status:"success",position:"top",duration:2000})
 const foundUser = res.data.find((user) => user.emailId === signindata.emailId && user.password === signindata.password);
 dispatch(singinsuccess(foundUser))
-navigate("/user")
+setUserprofile(foundUser)
+
    }else{
     toast({description:"Not a Registered User",status:"error",position:"top",duration:2000}) 
     dispatch(signinfailure())
@@ -51,8 +62,11 @@ navigate("/user")
    
 }).catch((err)=>dispatch(signinfailure()))
     }
-    console.log(userdata)
+const {userName,firstName,lastName,emailId,mobileNo,dob,id}=userprofile
   return (
+    <>
+     <ProfileModel id={id} isOpen={userName} onClose={() => setUserprofile(intuserprofile)}  userName={userName} firstName={firstName}
+lastName={lastName} emailId={emailId} mobileNo={mobileNo} dob={dob}      />
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -106,5 +120,8 @@ navigate("/user")
         </Box></form>
       </Stack>
     </Flex>
+   
+    
+    </>
   )
 }

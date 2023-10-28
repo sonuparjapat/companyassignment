@@ -66,11 +66,11 @@ const handlesubmit=(e)=>{
     const maindate=formatDate(signupdata.dob)
     const mobileNumberPattern = /^\d{10}$/;
     if (mobileNumberPattern.test(signupdata.mobileNo)) {
-       dispatch(signup({...signupdata,dob:maindate})).then((res)=>{
+       dispatch(signup).then((res)=>{
         const isEmailInArray = res.data.some((element) => element.emailId === signupdata.emailId);
         // console.log(isEmailInArray)
         if(!isEmailInArray){
-            axios.post(`${api}/users`,signupdata).then((res)=>{
+            axios.post(`${api}/users`,{...signupdata,dob:maindate}).then((res)=>{
                 toast({description:"Signup Successfully",status:"success","position":"top",duration:2000})
 
                 dispatch(signupsuccess())
@@ -84,6 +84,8 @@ const handlesubmit=(e)=>{
         dispatch(signupfailure())
        })
            
+    }else{
+      toast({description:"Please Provide a valid Mobile No.",status:"error","position":"top",duration:2000}) 
     }
    
 }
@@ -129,7 +131,7 @@ const handlesubmit=(e)=>{
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl id="userName">
+            <FormControl id="userName" isRequired>
                   <FormLabel>userName</FormLabel>
                   <Input type="text" name="userName" onChange={handlechange} value={signupdata.userName}/>
                 </FormControl>

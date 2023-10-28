@@ -16,7 +16,7 @@ export const setsingupfinally=()=>{
     return {type:signupfinally}
 }
 
-export const signup=(obj)=>(dispatch)=>{
+export const signup=(dispatch)=>{
     // console.log(obj)
     dispatch(signuprequest())
    return axiosWithAuth.get(`${api}/users`)
