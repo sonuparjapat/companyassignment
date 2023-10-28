@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signin, signinfailure, singinsuccess } from '../../Redux/Authentication/Action'
@@ -34,11 +34,18 @@ const intuserprofile={
 }
 export default function SignIn() {
     const [signindata,setSignindata]=useState(initialdata)
+    const [foranychange,setForanyChange]=useState(false)
     const [userprofile,setUserprofile]=useState(intuserprofile)
     const handlechange=(e)=>{
         const {name,value}=e.target
         setSignindata((pre)=>({...pre,[name]:value}))
     }
+    const handleupdate=()=>{
+      setForanyChange(!foranychange)
+    }
+    useEffect(()=>{
+
+    },[foranychange])
     const dispatch=useDispatch()
     const toast=useToast()
     const navigate=useNavigate()
@@ -66,7 +73,7 @@ const {userName,firstName,lastName,emailId,mobileNo,dob,id}=userprofile
   return (
     <>
      <ProfileModel id={id} isOpen={userName} onClose={() => setUserprofile(intuserprofile)}  userName={userName} firstName={firstName}
-lastName={lastName} emailId={emailId} mobileNo={mobileNo} dob={dob}      />
+lastName={lastName} emailId={emailId} mobileNo={mobileNo} dob={dob} handleupdate={handleupdate}     />
     <Flex
       minH={'100vh'}
       align={'center'}

@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { FormControl,FormLabel,Input,ModalFooter,Button,ModalCloseButton,ModalBody,ModalHeader,ModalContent,Modal,useDisclosure,ModalOverlay, Box, Text } from "@chakra-ui/react"
 import DeleteDialoge from "./DeleteDiaload"
-export default function ProfileModel({id,isOpen,onClose,userName,firstName,lastName,emailId,mobileNo,dob}) {
- 
+import Edit from "./Edit"
+export default function ProfileModel({id,isOpen,onClose,userName,firstName,lastName,emailId,mobileNo,dob,handleupdate}) {
+
   
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
@@ -58,37 +59,14 @@ export default function ProfileModel({id,isOpen,onClose,userName,firstName,lastN
     </Box>
       
               </Box>
-              {/* <FormControl isRequired >
-                <FormLabel>First name</FormLabel>
-                <Input isDisabled ref={initialRef} value={firstName} placeholder='first name' />
-              </FormControl>
-  
-              <FormControl mt={4}>
-                <FormLabel>Last name</FormLabel>
-                <Input isDisabled value={lastName} placeholder='last name' />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>User Name</FormLabel>
-                <Input isDisabled value={userName} placeholder='user name' />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>EmailId</FormLabel>
-                <Input isDisabled value={emailId} placeholder='email Id' />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>MobileNo</FormLabel>
-                <Input isDisabled value={mobileNo} placeholder='mobile no' />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>D.O.B</FormLabel>
-                <Input isDisabled value={dob} placeholder='dob' />
-              </FormControl>
-              */}
+          
             </ModalBody>
   
             <ModalFooter>
-            <DeleteDialoge id={id}/>
-              <Button onClick={onClose}>Cancel</Button>
+              <Box display={"flex"} justifyContent={"space-evenly"}>
+          <Box p={2}><Edit handleupdate={handleupdate} id={id} firstName={firstName}lastName={lastName} userName={userName} emailId={emailId} mobileNo={mobileNo} dob={dob}/></Box>  
+          <Box  p={2}>  <DeleteDialoge id={id}/></Box>
+             <Box  p={2}> <Button onClick={onClose}>Cancel</Button></Box></Box>
             </ModalFooter>
           </ModalContent>
         </Modal>
